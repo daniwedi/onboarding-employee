@@ -1,0 +1,31 @@
+#%RAML 1.0
+title: personal-doc-verification
+baseUri: http://localhost:8081
+
+/doc-verification:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include doc-verify.json
+      404:
+        body:
+          application/json:
+            example: !include error.json
+              
+
+/bg-verification:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include bg-verify.json
+      404:
+        body:
+          application/json:
+            example: !include error.json
+              
+
+              

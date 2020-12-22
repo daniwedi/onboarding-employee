@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="employee-sys-apiFlow" doc:id="37586608-9114-485b-b979-020ac0c3f28e" >
+		<http:listener doc:name="Listener" doc:id="ddecdf13-2c68-4b9a-b38a-4133eb68135e" config-ref="personal-doc-verification-httpListenerConfig" path="/employee"/>
+		<scatter-gather doc:name="Scatter-Gather" doc:id="8f2ba471-07f2-4994-95f7-888d033b00fd" >
+			<route >
+				<db:select doc:name="Select from employee master" doc:id="95df2664-e0b0-4b2f-a233-ff5c1185f337" config-ref="Database_Config">
+					<db:sql ><![CDATA[select emp_id, emp_name, emp_status, emp_address from onboard.emp_master]]></db:sql>
+				</db:select>
+			</route>
+			<route >
+				<http:request method="GET" doc:name="select doc verification" doc:id="a05729f9-da87-4e37-8a5f-82aed3aaa866" config-ref="HTTP_Request_configuration" path="api/doc-verification"/>
+			</route>
+			<route >
+				<http:request method="GET" doc:name="select bg verification" doc:id="c654cd88-a2a6-4f1c-bae8-c50afd2b5087" config-ref="HTTP_Request_configuration" path="/api/bg-verification"/>
+			</route>
+		</scatter-gather>
+		<ee:transform doc:name="Transform Message" doc:id="6493132a-e783-40dd-b533-6cff1cc335e1" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	employees:payload."0".payload map(emp, indexOfEmp) ->{
+		empID:emp.emp_id,
+		empName:emp.emp_name,
+		empStatus:emp.emp_status,
+		empAddress:emp.emp_address,
+		check:payload."1".payload filter ($.empID==emp.emp_id) 
+		map(empcheck, indexOfEmpheck) ->
+		{
+			docVerification:empcheck.docVerification,
+		bg:payload."2".payload filter($.empID==emp.emp_id) map(empbg, indexofempbg) ->{
+				diagnosisCheck:empbg.diagnosisCheck,
+				criminalCheck:empbg.criminalCheck
+			}
+		}
+	}
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

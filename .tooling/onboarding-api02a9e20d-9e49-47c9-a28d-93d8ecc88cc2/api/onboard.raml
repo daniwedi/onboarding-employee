@@ -1,0 +1,15 @@
+#%RAML 1.0
+title: onboarding api
+baseUri: http://localhost:8081
+
+/employees:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include emploees.json
+      404:
+        body:
+          application/json:
+            example: !include error.json

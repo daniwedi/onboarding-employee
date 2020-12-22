@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="a2d3c6b2-81b4-4da1-a0f9-68a6933b5b96" >
+		<db:my-sql-connection host="database-1.cak1qyiecn3r.us-west-1.rds.amazonaws.com" port="3306" user="admin" password="daniboy123" database="onboard" >
+			<db:connection-properties >
+				<db:connection-property key="useSSL" value="false" />
+			</db:connection-properties>
+		</db:my-sql-connection>
+	</db:config>
+	<flow name="bg-sys-apiFlow" doc:id="2065d2d3-bfe7-49b3-a256-2e8149580b8e" >
+		<db:select doc:name="Select-BG-sys-spi" doc:id="0b53a68f-a25c-4df2-a533-316882d48e5c" config-ref="Database_Config">
+			<db:sql ><![CDATA[select * from onboard.bg_verification;]]></db:sql>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="b373254b-f387-441f-b41b-bb9ac04b469a" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

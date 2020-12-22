@@ -1,0 +1,29 @@
+{
+	"employees": [{
+			"empID": 100,
+			"empName": "Daniel",
+			"empStatus": "A",
+			"empAddress": "Las Vegas",
+			"check": [{
+				"docVerification": "pass",
+				"bg": [{
+					"diagnosisCheck": "pass",
+					"criminalCheck": "pass"
+				}]
+			}]
+		},
+		{
+			"empID": 101,
+			"empName": "Daniel",
+			"empStatus": "A",
+			"empAddress": "Las Vegas",
+			"check": [{
+				"docVerification": "pass",
+				"bg": [{
+					"diagnosisCheck": "pass",
+					"criminalCheck": "pass"
+				}]
+			}]
+		}
+	]
+}

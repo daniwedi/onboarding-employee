@@ -1,0 +1,6 @@
+http:
+  port: "8081"
+  host: "personal-doc-verify-api.us-e2.cloudhub.io"
+
+API:
+  ID: "16541227"

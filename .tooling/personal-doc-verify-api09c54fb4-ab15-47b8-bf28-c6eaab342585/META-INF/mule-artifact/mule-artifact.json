@@ -1,0 +1,35 @@
+{
+  "configs": [
+    "employee-sys-api.xml",
+    "doc-sys-api.xml",
+    "bg-sys-api.xml",
+    "personal-doc-verification.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:personal-doc-verify-api:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.3.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "api/bg-verify.json",
+        "api/doc-verify.json",
+        "api/error.json",
+        "api/personal-doc-verification.raml",
+        "bg-sys-api.xml",
+        "doc-sys-api.xml",
+        "employee-sys-api.xml",
+        "log4j2.xml",
+        "personal-doc-verification.xml",
+        "prop.yaml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

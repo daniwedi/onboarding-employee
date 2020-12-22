@@ -1,0 +1,29 @@
+{
+  "configs": [
+    "onboarding-api.xml",
+    "onboard.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "com.mycompany:onboarding-api:1.0.0-SNAPSHOT",
+  "minMuleVersion": "4.3.0",
+  "requiredProduct": "MULE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedPackages": [],
+      "exportedResources": [
+        "api/emploees.json",
+        "api/error.json",
+        "api/onboard.raml",
+        "log4j2.xml",
+        "onboard.xml",
+        "onboarding-api.xml"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

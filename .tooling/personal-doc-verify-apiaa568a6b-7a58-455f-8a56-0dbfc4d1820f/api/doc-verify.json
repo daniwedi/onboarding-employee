@@ -1,0 +1,12 @@
+[{
+  "empID":100,
+  "docVerification":"pass"
+},
+{
+  "empID":101,
+  "docVerification":"fail"
+},
+{
+  "empID":102,
+  "docVerification":"pass"
+}]

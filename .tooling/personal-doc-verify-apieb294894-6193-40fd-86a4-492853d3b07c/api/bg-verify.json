@@ -1,0 +1,11 @@
+[
+  {"empID":100,
+  "diagnosis-check":"pass",
+  "criminal-check":"pass"},
+  {"empID":101,
+  "diagnosis-check":"pass",
+  "criminal-check":"fail"},
+  {"empID":102,
+  "diagnosis-check":"fail",
+  "criminal-check":"pass"}
+]
